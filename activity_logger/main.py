@@ -13,6 +13,7 @@ class MainApp:
         self.log_manager = LogManager(self.config["log_destination"])
         self.browser_monitor = BrowserMonitor(self.log_manager)
         self.git_monitor = GitMonitor(self.config["directories"], self.log_manager)
+        self.running = True  # Add flag to control the main loop
 
     def run(self):
         self.browser_monitor.start()
@@ -24,10 +25,10 @@ class MainApp:
             self.browser_monitor.stop()
             self.git_monitor.stop()
             self.log_manager.stop()
-            sys.exit(0)
+            self.running = False  # Set flag to False to exit the main loop
 
         signal.signal(signal.SIGINT, signal_handler)
-        while True:
+        while self.running:  # Loop only while running is True
             time.sleep(1)
 
 
