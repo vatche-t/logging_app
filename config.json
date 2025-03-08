@@ -1,0 +1,7 @@
+{
+    "directories": [
+        "/home/user/projects"
+    ],
+    "browser": "Chrome",
+    "log_destination": "log/activity.log"
+}
